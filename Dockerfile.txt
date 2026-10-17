@@ -1,14 +1,12 @@
-﻿# Base runtime image for .NET Core
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.1 AS base
+﻿FROM mcr.microsoft.com/dotnet/core/aspnet:3.1 AS base
 WORKDIR /app
 EXPOSE 80
 EXPOSE 443
 
-# SDK image for building the app
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
 WORKDIR /src
 COPY ["timetabele.csproj", "./"]
-RUN dotnet restore "timetabele.csproj"
+RUN dotnet restore "./timetabele.csproj"
 COPY . .
 WORKDIR "/src/."
 RUN dotnet build "timetabele.csproj" -c Release -o /app/build
