@@ -7,10 +7,10 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
-COPY ["timetabele/timetabele.csproj", "timetabele/"]
-RUN dotnet restore "timetabele/timetabele.csproj"
+COPY ["timetabele.csproj", "./"]
+RUN dotnet restore "./timetabele.csproj"
 COPY . .
-WORKDIR "/src/timetabele"
+WORKDIR "/src/."
 RUN dotnet build "timetabele.csproj" -c Release -o /app/build
 
 FROM build AS publish
